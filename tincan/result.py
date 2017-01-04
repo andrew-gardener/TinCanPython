@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 from datetime import timedelta
+from six import text_type
 
 from tincan.serializable_base import SerializableBase
 from tincan.score import Score
@@ -191,7 +192,7 @@ class Result(SerializableBase):
     @response.setter
     def response(self, value):
         try:
-            self._response = value if value is None else str(value)
+            self._response = value if value is None else text_type(value)
         except Exception as e:
             e_type = ValueError if isinstance(value, (list, tuple)) else TypeError
             msg = (
